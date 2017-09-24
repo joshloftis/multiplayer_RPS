@@ -1,60 +1,38 @@
+var config = {
+  apiKey: "AIzaSyDyumcsYscDN3FeA7dRk5NPP06yeiini2w",
+  authDomain: "rock-paper-scissors-73f3c.firebaseapp.com",
+  databaseURL: "https://rock-paper-scissors-73f3c.firebaseio.com",
+  projectId: "rock-paper-scissors-73f3c",
+  storageBucket: "",
+  messagingSenderId: "622403492860"
+};
+firebase.initializeApp(config);
+
 var choices = ["rock", "paper", "scissors"];
-var userAns;
-var compAns;
-var userWins = 0;
-var userLosses= 0;
-var compWins = 0;
-var compLosses = 0;
+var user1Ans;
+var user2Ans;
+var user1Wins = 0;
+var user1Losses= 0;
+var user2Wins = 0;
+var user2Losses = 0;
 var ties = 0;
 
-$('li').on('click', function() {
-  userAns = $(this).html();
-  console.log(userAns);
-  compAns = choices[Math.floor(Math.random() * choices.length)];
-  console.log(compAns);
-  evalGame();
-});
-
-function winComp() {
-  console.log("Computer wins");
-  compWins++;
-  userLosses++;
-  $('#compWins').html(compWins);
-  $('#userLosses').html(userLosses);
-}
-
-function winUser() {
-  console.log("User wins");
-  userWins++;
-  compLosses++;
-  $('#userWins').html(userWins);
-  $('#compLosses').html(compLosses);
-}
-
-function tie() {
-  console.log("Tie");
-  ties++;
-  $('#ties').html(ties);
-}
-
 function evalGame() {
-  if (userAns == "rock" && compAns == "paper") {
-    winComp();
-  } else if (userAns == "paper" && compAns == "scissors") {
-    winComp();
-  } else if (userAns == "scissors" && compAns == "rock") {
-    winComp();
-  } else if (compAns == "rock" && userAns == "paper") {
-    winUser();
-  } else if (compAns == "paper" && userAns == "scissors") {
-    winUser();
-  } else if (compAns == "scissors" && userAns == "rock") {
-    winUser();
-  } else if (compAns == "rock" && userAns == "rock") {
-    tie();
-  } else if (compAns == "paper" && userAns == "paper") {
-    tie();
-  } else if (compAns == "scissors" && userAns == "scissors") {
-    tie();
+  if ((user1Ans === "rock") || (user1Ans === "paper") || (user1Ans === "scissors")) {
+    if ((user1Ans === "rock") && (user2Ans === "scissors")) {
+      wins++;
+    } else if ((user1Ans === "rock") && (user2Ans === "paper")) {
+      losses++;
+    } else if ((user1Ans === "scissors") && (user2Ans === "rock")) {
+      losses++;
+    } else if ((user1Ans === "scissors") && (user2Ans === "paper")) {
+      wins++;
+    } else if ((user1Ans === "paper") && (user2Ans === "rock")) {
+      wins++;
+    } else if ((user1Ans === "paper") && (user2Ans === "scissors")) {
+      losses++;
+    } else if (user1Ans === user2Ans) {
+      ties++;
+    }
   }
 }
